@@ -13,9 +13,7 @@
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate,secondViewDelegate>
 
 @property (nonatomic , retain) UITableView *tableView;
-
 @property (nonatomic, retain) NSMutableDictionary *dicContact;
-
 @property (nonatomic, retain) NSMutableArray *arrKey;
 
 @end
@@ -26,11 +24,8 @@
 - (void)dealloc{
 
     [_tableView release];
-    
     [_dicContact release];
-    
     [_arrKey release];
-    
     [super dealloc];
 
 }
@@ -42,13 +37,9 @@
     self.navigationItem.title = @"通讯录";
    
     [self creatTableView];
-    
     [self handleDateFromPlist];
-    
     [self tableViewisEdit];
-    
     [self addOfContant];
-    
 
 }
 
@@ -57,32 +48,26 @@
 - (void)creatTableView{
 
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-    
     [self.view addSubview:self.tableView];
-
+    self.tableView.rowHeight = 80;
     [_tableView release];
-    
     self.tableView.dataSource = self;
-    
     self.tableView.delegate = self;
 
 }
 
 /** 导入数据 */
 
-
 - (void)handleDateFromPlist{
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Contacts" ofType:@"plist"];
-    
     self.dicContact = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
   //  self.arrKey = [self.dicContact allKeys].mutableCopy;
     
-    // 排序
+    /** key 分区排序 */
     
     self.arrKey = [NSMutableArray arrayWithArray:[self.dicContact allKeys]];
-    
     [self.arrKey sortUsingSelector:@selector(compare:)];
 
 }
@@ -107,30 +92,38 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *poll1 = @"reuse1";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:poll1] ;
-    
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:poll1] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:poll1] autorelease];
     }
     
-    // 确定分区 section
+    
+    /** 确定分区 section */
     
     NSString *key = [self.arrKey objectAtIndex:indexPath.section];
-    
     NSArray *arr = [self.dicContact objectForKey:key];
     
-    //每个联系人的小字典
+    /** 每个联系人的小字典 */
     
     NSDictionary *dic = [arr objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [dic objectForKey:@"name"];
+    
+    NSLog(@"%@",cell.textLabel.text);
+    
+    //cell.detailTextLabel.text = [dic objectForKey:@"phone"];
+
+    cell.imageView.image = [UIImage imageNamed:[dic objectForKey:@"photo"]];
+    
+    cell.imageView.layer.cornerRadius = 40;
+    
+    cell.imageView.layer.masksToBounds = YES;
 
     return cell;
 
 }
 
-// 索引
+/** 索引 */
 
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
@@ -139,7 +132,7 @@
     
 }
 
-// 分区数
+/** 分区数 */
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
 
@@ -147,7 +140,7 @@
 
 }
 
-// 分区的区头标题
+/** 分区的区头标题 */
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
@@ -156,7 +149,7 @@
 }
 
 
-// 编辑状态添加
+/** 编辑状态添加 */
 
 - (void)tableViewisEdit{
     
@@ -164,13 +157,12 @@
     
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
     
-    
 }
 
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     
-    // 必须先调用父类方法
+    /** 必须先调用父类方法,点击后会有动作 */
     
     [super setEditing:editing  animated:animated];
     
@@ -181,7 +173,7 @@
 }
 
 
-// 左上角添加按钮  " + "
+/** 左上角添加按钮  " + " */
 
 - (void)addOfContant{
 
@@ -191,29 +183,22 @@
 
 
 - (void)addOfContantAction:(UIButton *)button{
-
-// 添加
+ 
+/** 添加方法 */
     
     SecondController *second = [[SecondController alloc] init];
-    
     [self.navigationController pushViewController:second animated:YES];
-    
-    second.delegate = self; // 指定代理人
-
+    second.delegate = self; /** 指定代理人*/
     [second release];
-
 
 }
 
 
-/** 实现协议方法*/
+/** 实现协议方法,传值 */
 
 - (void)textFieldOfchange:(NSMutableDictionary *) mdic{
-
     
     NSString *strOfgroup =[[mdic objectForKey:@"name"] substringToIndex:1].capitalizedString;
-    
-    NSLog(@"%@",strOfgroup);
 
     NSMutableArray *marr = [NSMutableArray array];
     
@@ -222,9 +207,6 @@
         marr = [self.dicContact objectForKey:strOfgroup];
         
         [marr addObject:mdic];
-        
-        NSLog(@"%@",marr);
-     
         
     }else{
         

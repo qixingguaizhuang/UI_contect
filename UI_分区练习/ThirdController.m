@@ -60,24 +60,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self creatLabelOfName];
-    
     [self creatLabelOfPhone];
-    
     [self creatLabelOfHobby];
-    
     [self creatLableOfLine];
-    
     [self creatImageViewOfHead];
     
     /* 固定 label */
+    
     [self creatLableOfLeftName];
-    
     [self creatLableOfLeftPhone];
-    
     [self creatLableOfLeftHobby];
     
-    
-    // Do any additional setup after loading the view.
 }
 
 /* 分割线 */
@@ -85,13 +78,9 @@
 - (void)creatLableOfLine{
     
     self.lableOfline = [[UILabel alloc] initWithFrame:CGRectMake(50, 370, self.view.frame.size.width - 100, 0.5)];
-    
     self.lableOfline.backgroundColor = [UIColor redColor];
-    
     [self.view addSubview:self.lableOfline];
-    
     [_lableOfline release];
-
 
 }
 
@@ -100,53 +89,34 @@
 
 - (void)creatLableOfLeftName{
     
-    
     self.lableOfLeftName = [[UILabel alloc] initWithFrame:CGRectMake(60, 430, 120, 50)];
-    
     self.lableOfLeftName.backgroundColor = [UIColor clearColor];
-    
-    self.lableOfLeftName.text = @"联系人:";
-    
-    self.lableOfLeftName.font = [UIFont systemFontOfSize:25];
-    
+    self.lableOfLeftName.text = @"联 系 人  :";
+    self.lableOfLeftName.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfLeftName];
-    
     [_lableOfLeftName release];
 
 }
 
 - (void)creatLableOfLeftPhone{
     
-    
     self.lableOfLeftPhone = [[UILabel alloc] initWithFrame:CGRectMake(60, 500, 120, 50)];
-    
     self.lableOfLeftPhone.backgroundColor = [UIColor clearColor];
-    
-    self.lableOfLeftPhone.text = @"电话号码:";
-    
-    self.lableOfLeftPhone.font = [UIFont systemFontOfSize:25];
-    
+    self.lableOfLeftPhone.text = @"电话号码 :";
+    self.lableOfLeftPhone.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfLeftPhone];
-    
     [_lableOfLeftPhone release];
-
 
 }
 
 - (void)creatLableOfLeftHobby{
     
     self.lableOfLeftHobby = [[UILabel alloc] initWithFrame:CGRectMake(60, 570, 120, 50)];
-    
     self.lableOfLeftHobby.backgroundColor = [UIColor clearColor];
-    
-    self.lableOfLeftHobby.text = @"个人爱好:";
-    
-    self.lableOfLeftHobby.font = [UIFont systemFontOfSize:25];
-    
+    self.lableOfLeftHobby.text = @"个人爱好 :";
+    self.lableOfLeftHobby.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfLeftHobby];
-    
     [_lableOfLeftHobby release];
-
 
 }
 
@@ -158,19 +128,10 @@
 - (void)creatLabelOfName{
     
     self.lableOfName = [[UILabel alloc] initWithFrame:CGRectMake(170, 430, 220, 50)];
-    
     self.lableOfName.backgroundColor = [UIColor clearColor];
-    
     self.lableOfName.text = self.strOfName;
-    
-    //self.lableOfName.textAlignment = NSTextAlignmentCenter;
-    
-    self.lableOfName.font = [UIFont systemFontOfSize:25];
-    
-    //self.lableOfName.font = [UIFont fontWithName:@"STXihei" size:900];
-    
+    self.lableOfName.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfName];
-    
     [_lableOfName release];
 
 }
@@ -181,15 +142,10 @@
 - (void)creatLabelOfPhone{
     
     self.lableOfPhone = [[UILabel alloc] initWithFrame:CGRectMake(170, 500, 220, 50)];
-    
     self.lableOfPhone.backgroundColor = [UIColor clearColor];
-    
     self.lableOfPhone.text = self.strOfPhone;
-    
-    self.lableOfPhone.font = [UIFont systemFontOfSize:25];
-    
+    self.lableOfPhone.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfPhone];
-    
     [_lableOfPhone release];
 
 }
@@ -199,15 +155,10 @@
 - (void)creatLabelOfHobby{
     
     self.lableOfHobby = [[UILabel alloc] initWithFrame:CGRectMake(170, 570, 220, 50)];
-    
     self.lableOfHobby.backgroundColor = [UIColor clearColor];
-    
     self.lableOfHobby.text = self.strOfhobby;
-    
-    self.lableOfHobby.font = [UIFont systemFontOfSize:25];
-    
+    self.lableOfHobby.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.lableOfHobby];
-    
     [_lableOfHobby release];
   
 }

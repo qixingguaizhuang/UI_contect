@@ -24,7 +24,7 @@
         
         /* 字体 大小 */
         
-//        self.lableOfLeft.font = [UIFont systemFontOfSize:25];
+        self.lableOfLeft.font = [UIFont systemFontOfSize:20];
         
         
         
@@ -34,7 +34,7 @@
         
 //        self.textfieldOfright.borderStyle = 3;
         
-//        self.textfieldOfright.font = [UIFont systemFontOfSize:25];
+       self.textfieldOfright.font = [UIFont systemFontOfSize:20];
 //        
 //        self.textfieldOfright.backgroundColor = [UIColor clearColor];
         

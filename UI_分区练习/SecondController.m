@@ -13,12 +13,6 @@
 
 @interface SecondController () <UITextFieldDelegate>
 
-@property(nonatomic, retain) UITextField *textFieldName;
-
-@property (nonatomic, retain) UITextField *textFieldOfPhoneNumber;
-
-@property(nonatomic, retain) UITextField *textFieldOfhobby;
-
 @property (nonatomic, retain) UIImageView *imageViewOfHead;
 
 @property (nonatomic, retain) UIImageView *imageViewOfBack;
@@ -31,8 +25,6 @@
 
 - (void)dealloc{
 
-    [_textFieldName release];
-    [_textFieldOfPhoneNumber release];
     [_imageViewOfBack release];
     [_imageViewOfHead release];
     [_lableOfLine release];
@@ -42,30 +34,23 @@
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
- 
     [self creatNameAndNumaber];
     [self creatImageViewOfHead];
     [self creatLableOfLine];
     [self addOfSave];
     
-    
-   
 }
 
 
 - (void)creatLableOfLine{
     
-    
     self.lableOfLine = [[UILabel alloc] initWithFrame:CGRectMake(50, 370, self.view.frame.size.width - 100, 0.5)];
-    
     self.lableOfLine.backgroundColor = [UIColor redColor];
-    
     [self.imageViewOfBack addSubview:self.lableOfLine];
-    
     [_lableOfLine release];
-    
     
 }
 
@@ -74,76 +59,77 @@
 
 - (void)creatNameAndNumaber{
     
+    /** 添加联系人界面背景图片 */
     
-    self.imageViewOfBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"b"]];
-    
+    self.imageViewOfBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"u"]];
     self.imageViewOfBack.frame = self.view.frame;
     
     [self.view addSubview:self.imageViewOfBack];
     
     self.imageViewOfBack.userInteractionEnabled = YES;
 
+    /** 联系人信息列表 */
+    
+    /** 联系人 */
 
-    
-    
-    
-    LTView *nameView = [[LTView alloc] initWithFrame:CGRectMake(40, 420, self.view.frame.size.width - 80, 60)];
+    LTView *nameView = [[LTView alloc] initWithFrame:CGRectMake(60, 420, self.view.frame.size.width - 120, 60)];
     
     nameView.tag = 100;
-    nameView.lableOfLeft.text = @"联系人:";
+    nameView.lableOfLeft.text = @"联 系 人  :";
     
     nameView.textfieldOfright.placeholder = @"请输入联系人";
     
-    nameView.textfieldOfright.borderStyle = UITextBorderStyleBezel;
+    nameView.textfieldOfright.borderStyle = UITextBorderStyleNone;
     
-    [self.view addSubview:nameView];
+    [self.imageViewOfBack addSubview:nameView];
 
     [nameView release];
     
+    /** 电话号码 */
     
-    
-    LTView *viewOfKey = [[LTView alloc] initWithFrame:CGRectMake(40, 490, self.view.frame.size.width - 80, 60)];
+    LTView *viewOfKey = [[LTView alloc] initWithFrame:CGRectMake(60, 490, self.view.frame.size.width - 120, 60)];
     viewOfKey.tag = 200;
-    viewOfKey.lableOfLeft.text = @"电话号码";
+    viewOfKey.lableOfLeft.text = @"电话号码 :";
     
     viewOfKey.textfieldOfright.placeholder = @"请输入电话号码";
     
-    viewOfKey.textfieldOfright.borderStyle = UITextBorderStyleBezel;
+    viewOfKey.textfieldOfright.borderStyle = 0;
     
-    [self.view addSubview:viewOfKey];
+    [self.imageViewOfBack addSubview:viewOfKey];
     
     [viewOfKey release];
     
+    /** 个人爱好 */
     
-    LTView *viewOfHobby = [[LTView alloc] initWithFrame:CGRectMake(40, 560, self.view.frame.size.width - 80, 60)];
+    LTView *viewOfHobby = [[LTView alloc] initWithFrame:CGRectMake(60, 560, self.view.frame.size.width - 120, 60)];
     viewOfHobby.tag = 300;
-    viewOfHobby.lableOfLeft.text = @"个人爱好";
+    viewOfHobby.lableOfLeft.text = @"个人爱好 :";
     viewOfHobby.textfieldOfright.placeholder = @"请输入个人爱好";
     
-    viewOfHobby.textfieldOfright.borderStyle = UITextBorderStyleBezel;
     
-    [self.view addSubview:viewOfHobby];
+    viewOfHobby.textfieldOfright.borderStyle = 0;
+    
+    [self.imageViewOfBack addSubview:viewOfHobby];
     
     [viewOfHobby release];
+    
+    /** textfield 协议方法,指定联系人*/
 
-    
-    
     nameView.textfieldOfright.delegate = self;
-    
     viewOfKey.textfieldOfright.delegate = self;
-    
     viewOfHobby.textfieldOfright.delegate = self;
 
 }
 
 
-/* 背景向上滑动 协议方法 */
+/* 背景图片向上滑动 协议方法 */
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
     [UIView animateWithDuration:1 animations:^{
     
-    self.imageViewOfBack.frame = CGRectMake(0, -200, self.view.frame.size.width, self.view.frame.size.height);
+ self.imageViewOfBack.frame = CGRectMake(0, -200, self.view.frame.size.width, self.view.frame.size.height);
+ 
 }];
     return YES;
 
@@ -154,7 +140,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
-    // 弹上去之后弹回
+    /** 界面弹上去之后弹回 */
     
     [UIView animateWithDuration:0.22 animations:^{
         
@@ -165,8 +151,6 @@
     
     [textField resignFirstResponder];
     
-     [self.view endEditing:YES];
-    
     return YES;
     
 }
@@ -175,24 +159,15 @@
 
 /** 添加联系人头像 */
 
-
 - (void)creatImageViewOfHead{
 
     self.imageViewOfHead = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"t2.jpg"]];
-    
     self.imageViewOfHead.frame = CGRectMake(90, 100, 230, 230);
-    
     self.imageViewOfHead.backgroundColor = [UIColor cyanColor];
-    
     self.imageViewOfHead.layer.cornerRadius = 115;
-    
     self.imageViewOfHead.layer.masksToBounds = YES;
-    
     [self.imageViewOfBack addSubview:self.imageViewOfHead];
-    
     [_imageViewOfHead release];
-
-
 
 }
 
@@ -206,34 +181,29 @@
     
 }
 
+/** save 按键方法*/
 
 - (void)addOfSaveAction:(UIButton *) button{
     
     [self.navigationController popViewControllerAnimated:YES];
-
+    
     NSMutableDictionary *mdic = [NSMutableDictionary dictionary];
     
     LTView *view = [self.view viewWithTag:100];
-    
     LTView *viewOfphone = [self.view viewWithTag:200];
-    
     LTView *viewOfHobby = [self.view viewWithTag:300];
     
     NSString *key = [NSString stringWithFormat:@"name"];
     
-    
     [mdic setObject:view.textfieldOfright.text forKey:key];
-    
     key = [NSString stringWithFormat:@"phone"];
     [mdic setObject:viewOfphone.textfieldOfright.text forKey:key];
-    
     key = [NSString stringWithFormat:@"hobby"];
     [mdic setObject:viewOfHobby.textfieldOfright.text forKey:key];
     
     [self.delegate textFieldOfchange:mdic];
     
     NSLog(@"%@",mdic);
-
 
 }
 
